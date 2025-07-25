@@ -1,0 +1,12 @@
+com\calculator\subtraction\domain\SubtractionCalculator.class
+com\calculator\subtraction\domain\InputValidator.class
+com\calculator\subtraction\web\SubtractionController.class
+com\calculator\subtraction\SubtractionServiceApplication.class
+com\calculator\subtraction\domain\CalculationRequest.class
+com\calculator\subtraction\infrastructure\InMemoryCalculationCache.class
+com\calculator\subtraction\domain\CalculationCache.class
+com\calculator\subtraction\domain\SimpleSubtractionCalculator.class
+com\calculator\subtraction\domain\SubtractionInputValidator.class
+com\calculator\subtraction\application\ExecuteSubtractionUseCase.class
+com\calculator\subtraction\domain\CalculationResult.class
+com\calculator\subtraction\web\HealthResponse.class

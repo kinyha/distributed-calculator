@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 1000ms
+
+services:
+  addition:
+    url: ${ADDITION_SERVICE_URL:http://localhost:8081}
+  subtraction:
+    url: ${SUBTRACTION_SERVICE_URL:http://localhost:8082}
+  multiplication:
+    url: ${MULTIPLICATION_SERVICE_URL:http://localhost:8083}
+  division:
+    url: ${DIVISION_SERVICE_URL:http://localhost:8084}
+
+history:
+  service:
+    url: ${HISTORY_SERVICE_URL:http://calculator-history:8085}
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      operation-service:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 30s
+        permitted-number-of-calls-in-half-open-state: 3
+  timelimiter:
+    instances:
+      operation-service:
+        timeout-duration: 3s
+
+logging:
+  level:
+    com.calculator: DEBUG

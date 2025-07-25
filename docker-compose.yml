@@ -1,0 +1,117 @@
+version: '3.8'
+
+services:
+  # Infrastructure Services
+  postgresql:
+    image: postgres:15-alpine
+    container_name: calculator-postgres
+    environment:
+      POSTGRES_DB: calculator_history
+      POSTGRES_USER: calculator
+      POSTGRES_PASSWORD: calculator123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - calculator-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: calculator-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - calculator-network
+
+  # API Gateway
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: calculator-api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - ADDITION_SERVICE_URL=http://addition-service:8081
+      - SUBTRACTION_SERVICE_URL=http://subtraction-service:8082
+      - MULTIPLICATION_SERVICE_URL=http://multiplication-service:8083
+      - DIVISION_SERVICE_URL=http://division-service:8084
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+    depends_on:
+      - redis
+      - addition-service
+      - subtraction-service
+      - multiplication-service
+      - division-service
+    networks:
+      - calculator-network
+
+  # Operation Services
+  addition-service:
+    build:
+      context: ./services/addition-service
+      dockerfile: Dockerfile
+    container_name: calculator-addition
+    ports:
+      - "8081:8081"
+    networks:
+      - calculator-network
+
+  subtraction-service:
+    build:
+      context: ./services/subtraction-service
+      dockerfile: Dockerfile
+    container_name: calculator-subtraction
+    ports:
+      - "8082:8082"
+    networks:
+      - calculator-network
+
+  multiplication-service:
+    build:
+      context: ./services/multiplication-service
+      dockerfile: Dockerfile
+    container_name: calculator-multiplication
+    ports:
+      - "8083:8083"
+    networks:
+      - calculator-network
+
+  division-service:
+    build:
+      context: ./services/division-service
+      dockerfile: Dockerfile
+    container_name: calculator-division
+    ports:
+      - "8084:8084"
+    networks:
+      - calculator-network
+
+  # History Service
+  history-service:
+    build:
+      context: ./services/history-service
+      dockerfile: Dockerfile
+    container_name: calculator-history
+    ports:
+      - "8085:8085"
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgresql:5432/calculator_history
+      - DATABASE_USERNAME=calculator
+      - DATABASE_PASSWORD=calculator123
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - postgresql
+      - redis
+    networks:
+      - calculator-network
+
+volumes:
+  postgres_data:
+
+networks:
+  calculator-network:
+    driver: bridge

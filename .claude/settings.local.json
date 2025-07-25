@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(chmod:*)",
+      "Bash(curl:*)",
+      "Bash(./gradlew:*)",
+      "Bash(wget:*)",
+      "Bash(cp:*)",
+      "Bash(docker-compose logs:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}

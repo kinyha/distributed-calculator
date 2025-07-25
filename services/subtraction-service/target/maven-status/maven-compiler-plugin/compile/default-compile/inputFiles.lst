@@ -1,0 +1,11 @@
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\domain\CalculationCache.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\domain\SubtractionCalculator.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\domain\CalculationRequest.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\web\SubtractionController.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\web\HealthResponse.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\domain\SimpleSubtractionCalculator.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\SubtractionServiceApplication.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\domain\CalculationResult.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\application\ExecuteSubtractionUseCase.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\infrastructure\InMemoryCalculationCache.java
+C:\git\distributed-calculator\services\subtraction-service\src\main\java\com\calculator\subtraction\domain\InputValidator.java
